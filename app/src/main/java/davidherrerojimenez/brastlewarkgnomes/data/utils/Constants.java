@@ -10,4 +10,7 @@ public class Constants {
 
     public static final String BASE_URL = "https://raw.githubusercontent.com/rrafols/mobile_test/";
     public static final String FINAL_URL = "master/data.json";
+
+
+    public static final int OK = 200;
 }

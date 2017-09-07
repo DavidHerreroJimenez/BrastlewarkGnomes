@@ -15,7 +15,7 @@ public interface GnomesPresenter {
 
     void loadGnomes();
 
-    List<Brastlewark> getGnomishList();
+//    List<Brastlewark> getGnomishList();
 
-    String getMessage();
+//    String getMessage();
 }

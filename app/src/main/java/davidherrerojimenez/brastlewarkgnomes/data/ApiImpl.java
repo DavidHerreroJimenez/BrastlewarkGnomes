@@ -14,6 +14,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static davidherrerojimenez.brastlewarkgnomes.data.utils.Constants.BASE_URL;
+import static davidherrerojimenez.brastlewarkgnomes.data.utils.Constants.OK;
 
 /**
  * Project name: BrastlewarkGnomes
@@ -38,7 +39,7 @@ public class ApiImpl {
 }
 
 
-    public void getData() {
+    public void getData(final ApiCallFinished apiCallFinished) {
 
 
 
@@ -50,17 +51,22 @@ public class ApiImpl {
 
         Api api = retrofit.create(Api.class);
 
-        Call<Gnome> gnomeCall = api.readJson();
+        Call<Gnome> gnomeCall = api.readBrastlewarkGnomes();
 
         gnomeCall.enqueue(new Callback<Gnome>() {
             @Override
             public void onResponse(Call<Gnome> call, Response<Gnome> response) {
 
+                brastlewarkGnomishList = new ArrayList<>();
 
-                brastlewarkGnomishList = response.body().getBrastlewark();
-
+                if (response.code() == OK) {
+                    brastlewarkGnomishList = response.body().getBrastlewark();
+                }
 
                 message = response.message();
+
+
+                apiCallFinished.onApiCallsFinished(brastlewarkGnomishList,message);
 
 
             }
@@ -70,17 +76,13 @@ public class ApiImpl {
 
                 message = t.toString();
 
+                brastlewarkGnomishList = new ArrayList<>();
+
+                apiCallFinished.onApiCallsFinished(brastlewarkGnomishList,message);
+
             }
         });
 
     }
-
-   public  List<Brastlewark> getBrastlewarkGnomishList(){
-       return brastlewarkGnomishList;
-   }
-
-   public String getMessage(){
-       return message;
-   }
 
 }

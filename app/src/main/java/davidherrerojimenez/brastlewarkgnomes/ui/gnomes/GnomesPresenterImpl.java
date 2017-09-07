@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import davidherrerojimenez.brastlewarkgnomes.data.ApiCallFinished;
 import davidherrerojimenez.brastlewarkgnomes.data.ApiImpl;
 import davidherrerojimenez.brastlewarkgnomes.model.Brastlewark;
 
@@ -15,7 +16,7 @@ import davidherrerojimenez.brastlewarkgnomes.model.Brastlewark;
  * Created by dherrero on 7/09/17.
  */
 
-public class GnomesPresenterImpl implements GnomesPresenter{
+public class GnomesPresenterImpl implements GnomesPresenter, ApiCallFinished {
 
     GnomesView gnomesView;
     ApiImpl apiImpl;
@@ -33,19 +34,13 @@ public class GnomesPresenterImpl implements GnomesPresenter{
     @Override
     public void loadGnomes() {
         try {
-            apiImpl.getData();
-            gnomesView.onGnomesLoaded();
+            apiImpl.getData(this);
         } catch (Exception e) {
            handleExceptions(e);
         }
 
     }
 
-    @Override
-    public List<Brastlewark> getGnomishList() {
-
-        return apiImpl.getBrastlewarkGnomishList();
-    }
 
     private void handleExceptions(Exception e){
 
@@ -53,10 +48,11 @@ public class GnomesPresenterImpl implements GnomesPresenter{
 
     }
 
-    public String getMessage(){
-        return error;
+
+
+    @Override
+    public void onApiCallsFinished(List<Brastlewark> brastlewarkList, String message) {
+
+        gnomesView.onGnomesLoaded(brastlewarkList,message);
     }
-
-
-
 }

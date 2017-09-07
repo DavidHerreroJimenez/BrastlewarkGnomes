@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/adapter_gnome_list_linearlayout"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="@dimen/adapter_gnomes_list_height"
+    android:padding="@dimen/adapter_gnomes_list_padding"
+    android:layout_marginBottom="@dimen/adapter_gnomes_list_margin"
+    android:background="@android:color/white"
+    android:weightSum="4">
+
+    <ImageView
+        android:id="@+id/adapter_heroes_list_imageview"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/imageview_gnomes_list_height"
+        android:maxWidth="@dimen/imageview_gnomes_list_width"
+        android:layout_gravity="top"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/adapter_gnomes_list_padding_start_textviews"
+        android:layout_weight="3">
+
+        <TextView
+            android:id="@+id/adapter_heroes_list_textview_name"
+            android:layout_width="match_parent"
+            android:layout_gravity="top|start"
+            android:gravity="top|start"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textStyle="bold"
+            android:textSize="@dimen/adapter_gnomes_list_font_size_title"/>
+
+        <TextView
+            android:id="@+id/adapter_heroes_list_textview_description"
+            android:layout_gravity="top|start"
+            android:gravity="top|start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/holo_blue_light"
+            android:textStyle="normal"
+            android:textSize="@dimen/adapter_gnomes_list_font_size_description"/>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

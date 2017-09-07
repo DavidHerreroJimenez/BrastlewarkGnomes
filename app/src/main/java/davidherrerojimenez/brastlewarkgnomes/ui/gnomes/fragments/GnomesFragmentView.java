@@ -13,5 +13,5 @@ import davidherrerojimenez.brastlewarkgnomes.model.Brastlewark;
 
 public interface GnomesFragmentView {
 
-    void onGnomesFragmentLoaded(List<Brastlewark> brastlewarkList);
+    void onGnomesFragmentLoaded(List<Brastlewark> brastlewarkList, String message);
 }

@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -49,20 +50,15 @@ public class GnomesActivity extends AppCompatActivity implements HasSupportFragm
 
 
     @Override
-    public void onGnomesLoaded() {
+    public void onGnomesLoaded(List<Brastlewark> brastlewarks, String message) {
 
-        gnomesFragmentView.onGnomesFragmentLoaded(getGnomishList());
+        gnomesFragmentView.onGnomesFragmentLoaded(brastlewarks, message);
 
     }
 
-    private List<Brastlewark> getGnomishList(){
 
-        return gnomesPresenter.getGnomishList();
-    }
 
-    private String getMessageError(){
-        return gnomesPresenter.getMessage();
-    }
+
 
     @Override
     public AndroidInjector<Fragment> supportFragmentInjector() {

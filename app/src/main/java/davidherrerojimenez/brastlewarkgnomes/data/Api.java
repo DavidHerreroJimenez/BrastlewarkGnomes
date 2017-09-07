@@ -16,5 +16,5 @@ import static davidherrerojimenez.brastlewarkgnomes.data.utils.Constants.FINAL_U
 
 public interface Api {
     @GET(FINAL_URL)
-    Call<Gnome> readJson();
+    Call<Gnome> readBrastlewarkGnomes();
 }
