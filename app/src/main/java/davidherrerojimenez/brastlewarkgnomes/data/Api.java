@@ -1,5 +1,7 @@
 package davidherrerojimenez.brastlewarkgnomes.data;
 
+import javax.inject.Inject;
+
 /**
  * Project name: BrastlewarkGnomes
  * Package name: davidherrerojimenez.brastlewarkgnomes.data
@@ -9,5 +11,9 @@ package davidherrerojimenez.brastlewarkgnomes.data;
 
 public class Api {
 
-    void getData(){}
+    @Inject
+    public Api() {
+    }
+
+    public void getData(){}
 }

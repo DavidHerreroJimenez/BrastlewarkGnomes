@@ -7,5 +7,7 @@ package davidherrerojimenez.brastlewarkgnomes.ui.gnomes.fragments;
  * Created by dherrero on 7/09/17.
  */
 
-public class GnomesFragmentView {
+public interface GnomesFragmentView {
+
+    void onGnomesFragmentLoaded();
 }

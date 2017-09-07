@@ -8,4 +8,6 @@ package davidherrerojimenez.brastlewarkgnomes.ui.gnomes;
  */
 
 public interface GnomesPresenter {
+
+    void loadGnomes();
 }
