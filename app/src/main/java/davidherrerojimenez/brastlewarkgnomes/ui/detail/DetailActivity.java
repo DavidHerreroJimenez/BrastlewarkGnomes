@@ -1,5 +1,7 @@
 package davidherrerojimenez.brastlewarkgnomes.ui.detail;
 
+import android.support.v7.app.AppCompatActivity;
+
 /**
  * Project name: BrastlewarkGnomes
  * Package name: davidherrerojimenez.brastlewarkgnomes.ui
@@ -7,5 +9,5 @@ package davidherrerojimenez.brastlewarkgnomes.ui.detail;
  * Created by dherrero on 7/09/17.
  */
 
-public class DetailActivity {
+public class DetailActivity extends AppCompatActivity {
 }

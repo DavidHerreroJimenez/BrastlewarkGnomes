@@ -22,6 +22,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import dagger.android.support.AndroidSupportInjection;
 import davidherrerojimenez.brastlewarkgnomes.R;
 import davidherrerojimenez.brastlewarkgnomes.model.Brastlewark;
@@ -49,9 +50,10 @@ public class GnomesFragment extends Fragment implements GnomesFragmentView, Text
     @BindView(R.id.empty_list_textview)
     TextView emptyListtextView;
 
-    private List<Brastlewark> brastlewarkList;
+    private static List<Brastlewark> brastlewarkList;
     private String message;
-    private GnomeAdapter gnomeAdapter;
+    private static GnomeAdapter gnomeAdapter;
+    private Unbinder unbinder;
 
     @Inject
     public GnomesFragment() {
@@ -80,7 +82,7 @@ public class GnomesFragment extends Fragment implements GnomesFragmentView, Text
 
         View view = inflater.inflate(R.layout.fragment_gnomes, container, false);
 
-        ButterKnife.bind(this,view);
+        unbinder = ButterKnife.bind(this,view);
 
 
         if(savedInstanceState != null){
@@ -124,6 +126,7 @@ public class GnomesFragment extends Fragment implements GnomesFragmentView, Text
 
         gnomesRecyclerView.setLayoutManager(layoutManager);
 
+
         return view;
     }
 
@@ -134,6 +137,7 @@ public class GnomesFragment extends Fragment implements GnomesFragmentView, Text
 
         this.message = message;
 
+        refreshListAdapter(brastlewarkList);
 
     }
 
@@ -156,14 +160,6 @@ public class GnomesFragment extends Fragment implements GnomesFragmentView, Text
     }
 
 
-    public void getListOrEmptyTextIfListIsEmpty(RecyclerView gnomesRecyclerView, TextView emptyListtextView) {
-
-        this.gnomesRecyclerView = gnomesRecyclerView;
-        this.emptyListtextView = emptyListtextView;
-
-    }
-
-
     public void refreshListAdapter(List<Brastlewark> brastlewarks) {
 
 
@@ -173,13 +169,6 @@ public class GnomesFragment extends Fragment implements GnomesFragmentView, Text
             gnomeAdapter.notifyDataSetChanged();
 
 
-            if (brastlewarkList == null || brastlewarkList.isEmpty()){
-                gnomesRecyclerView.setVisibility(View.GONE);
-                emptyListtextView.setVisibility(View.VISIBLE);
-            }else{
-                gnomesRecyclerView.setVisibility(View.VISIBLE);
-                emptyListtextView.setVisibility(View.GONE);
-            }
 
         }
 
@@ -199,5 +188,10 @@ public class GnomesFragment extends Fragment implements GnomesFragmentView, Text
         super.onSaveInstanceState(outState);
 
 
+    }
+
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }

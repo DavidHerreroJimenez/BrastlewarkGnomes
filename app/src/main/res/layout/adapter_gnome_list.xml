@@ -11,7 +11,7 @@
     android:weightSum="4">
 
     <ImageView
-        android:id="@+id/adapter_heroes_list_imageview"
+        android:id="@+id/adapter_gnome_list_imageview"
         android:layout_width="0dp"
         android:layout_height="@dimen/imageview_gnomes_list_height"
         android:maxWidth="@dimen/imageview_gnomes_list_width"
@@ -26,7 +26,7 @@
         android:layout_weight="3">
 
         <TextView
-            android:id="@+id/adapter_heroes_list_textview_name"
+            android:id="@+id/adapter_gnome_list_textview_name"
             android:layout_width="match_parent"
             android:layout_gravity="top|start"
             android:gravity="top|start"
@@ -36,7 +36,7 @@
             android:textSize="@dimen/adapter_gnomes_list_font_size_title"/>
 
         <TextView
-            android:id="@+id/adapter_heroes_list_textview_description"
+            android:id="@+id/adapter_gnome_list_textview_professions"
             android:layout_gravity="top|start"
             android:gravity="top|start"
             android:layout_width="match_parent"

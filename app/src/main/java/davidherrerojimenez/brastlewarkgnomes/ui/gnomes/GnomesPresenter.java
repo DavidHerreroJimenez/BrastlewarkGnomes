@@ -15,7 +15,4 @@ public interface GnomesPresenter {
 
     void loadGnomes();
 
-//    List<Brastlewark> getGnomishList();
-
-//    String getMessage();
 }

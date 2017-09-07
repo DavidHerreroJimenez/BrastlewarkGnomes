@@ -1,7 +1,11 @@
 package davidherrerojimenez.brastlewarkgnomes.data;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 
 import static org.junit.Assert.*;
 
@@ -14,6 +18,12 @@ public class ApiImplTest {
 
     ApiImpl api;
 
+    @Mock
+    ApiCallFinished apiCallFinished;
+
+    @Rule
+    public MockitoRule mockitoRule = MockitoJUnit.rule();
+
     @Before
     public void setUp() throws Exception {
         api = new ApiImpl();
@@ -22,7 +32,8 @@ public class ApiImplTest {
     @Test
     public void getDataFromURL() throws Exception{
 
-        api.getData();
+
+        api.getData(apiCallFinished);
     }
 
 }

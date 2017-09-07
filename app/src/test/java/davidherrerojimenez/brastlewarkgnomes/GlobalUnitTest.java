@@ -4,6 +4,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 import davidherrerojimenez.brastlewarkgnomes.data.ApiImplTest;
+import davidherrerojimenez.brastlewarkgnomes.data.utils.UtilsTest;
 
 /**
  * Proyect: BrastlewarkGnomes.
@@ -12,6 +13,6 @@ import davidherrerojimenez.brastlewarkgnomes.data.ApiImplTest;
  */
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ApiImplTest.class})
+@Suite.SuiteClasses({ApiImplTest.class, UtilsTest.class})
 public class GlobalUnitTest {
 }

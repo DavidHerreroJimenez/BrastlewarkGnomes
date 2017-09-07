@@ -17,6 +17,8 @@ import butterknife.ButterKnife;
 import davidherrerojimenez.brastlewarkgnomes.R;
 import davidherrerojimenez.brastlewarkgnomes.model.Brastlewark;
 
+import static davidherrerojimenez.brastlewarkgnomes.data.utils.Utils.listOfStringsToStringFormatted;
+
 /**
  * Project name: BrastlewarkGnomes
  * Package name: davidherrerojimenez.brastlewarkgnomes.ui.gnomes.fragments.adapters
@@ -29,7 +31,6 @@ public class GnomeAdapter extends RecyclerView.Adapter<GnomeAdapter.ViewHolderAd
 
     private Context context;
     private List<Brastlewark> brastlewarkGnomishList;
-//    private HeroesListPresenterImp heroesListPresenterImp;
     private View.OnClickListener listener;
 
 
@@ -37,7 +38,6 @@ public class GnomeAdapter extends RecyclerView.Adapter<GnomeAdapter.ViewHolderAd
 
         this.context = context;
         this.brastlewarkGnomishList = brastlewarkGnomishList;
-//        heroesListPresenterImp = new HeroesListPresenterImp();
     }
 
     @Override
@@ -54,7 +54,7 @@ public class GnomeAdapter extends RecyclerView.Adapter<GnomeAdapter.ViewHolderAd
     public void onBindViewHolder(ViewHolderAdapterHeroesList holder, int position) {
 
         holder.tvName.setText(brastlewarkGnomishList.get(position).getName().trim());
-        holder.tvDescription.setText(brastlewarkGnomishList.get(position).getHairColor().trim());
+        holder.tvDescription.setText(listOfStringsToStringFormatted(brastlewarkGnomishList.get(position).getProfessions()));
 
         Picasso.with(context)
                 .load(brastlewarkGnomishList.get(position).getThumbnail())
@@ -70,8 +70,6 @@ public class GnomeAdapter extends RecyclerView.Adapter<GnomeAdapter.ViewHolderAd
 
     public void setList(List<Brastlewark> newGnomishList){
 
-//        brastlewarkGnomishList = heroesListPresenterImp.newListIfListIsNull(brastlewarkGnomishList);
-//        newGnomishList = heroesListPresenterImp.newListIfListIsNull(newGnomishList);
 
         brastlewarkGnomishList.clear();
         brastlewarkGnomishList.addAll(newGnomishList);
@@ -95,11 +93,11 @@ public class GnomeAdapter extends RecyclerView.Adapter<GnomeAdapter.ViewHolderAd
 
 
     public class ViewHolderAdapterHeroesList extends RecyclerView.ViewHolder {
-        @BindView(R.id.adapter_heroes_list_imageview)
+        @BindView(R.id.adapter_gnome_list_imageview)
         ImageView thumbnailImage;
-        @BindView(R.id.adapter_heroes_list_textview_name)
+        @BindView(R.id.adapter_gnome_list_textview_name)
         TextView tvName;
-        @BindView(R.id.adapter_heroes_list_textview_description)
+        @BindView(R.id.adapter_gnome_list_textview_professions)
         TextView tvDescription;
 
         public ViewHolderAdapterHeroesList(View itemView) {
