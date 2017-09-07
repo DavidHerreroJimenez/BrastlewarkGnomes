@@ -11,6 +11,7 @@ import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
 import davidherrerojimenez.brastlewarkgnomes.di.DaggerAppComponent;
 
+
 /**
  * Project name: BrastlewarkGnomes
  * Package name: davidherrerojimenez.brastlewarkgnomes

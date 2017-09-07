@@ -3,6 +3,9 @@ package davidherrerojimenez.brastlewarkgnomes.ui.gnomes;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -11,14 +14,21 @@ import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 import davidherrerojimenez.brastlewarkgnomes.R;
+import davidherrerojimenez.brastlewarkgnomes.model.Brastlewark;
 import davidherrerojimenez.brastlewarkgnomes.ui.gnomes.fragments.GnomesFragment;
+import davidherrerojimenez.brastlewarkgnomes.ui.gnomes.fragments.GnomesFragmentView;
 
 public class GnomesActivity extends AppCompatActivity implements HasSupportFragmentInjector, GnomesView{
 
+    @Inject
     DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
 
     @Inject
     GnomesPresenter gnomesPresenter;
+
+    @Inject
+    GnomesFragmentView gnomesFragmentView;
+
 
 
 
@@ -41,6 +51,17 @@ public class GnomesActivity extends AppCompatActivity implements HasSupportFragm
     @Override
     public void onGnomesLoaded() {
 
+        gnomesFragmentView.onGnomesFragmentLoaded(getGnomishList());
+
+    }
+
+    private List<Brastlewark> getGnomishList(){
+
+        return gnomesPresenter.getGnomishList();
+    }
+
+    private String getMessageError(){
+        return gnomesPresenter.getMessage();
     }
 
     @Override

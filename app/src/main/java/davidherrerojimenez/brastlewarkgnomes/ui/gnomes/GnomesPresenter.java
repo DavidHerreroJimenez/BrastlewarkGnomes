@@ -1,5 +1,9 @@
 package davidherrerojimenez.brastlewarkgnomes.ui.gnomes;
 
+import java.util.List;
+
+import davidherrerojimenez.brastlewarkgnomes.model.Brastlewark;
+
 /**
  * Project name: BrastlewarkGnomes
  * Package name: davidherrerojimenez.brastlewarkgnomes.ui.gnomes
@@ -10,4 +14,8 @@ package davidherrerojimenez.brastlewarkgnomes.ui.gnomes;
 public interface GnomesPresenter {
 
     void loadGnomes();
+
+    List<Brastlewark> getGnomishList();
+
+    String getMessage();
 }

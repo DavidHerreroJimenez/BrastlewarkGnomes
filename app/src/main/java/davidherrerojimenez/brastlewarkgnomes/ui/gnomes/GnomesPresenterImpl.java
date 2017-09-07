@@ -1,8 +1,12 @@
 package davidherrerojimenez.brastlewarkgnomes.ui.gnomes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
-import davidherrerojimenez.brastlewarkgnomes.data.Api;
+import davidherrerojimenez.brastlewarkgnomes.data.ApiImpl;
+import davidherrerojimenez.brastlewarkgnomes.model.Brastlewark;
 
 /**
  * Project name: BrastlewarkGnomes
@@ -14,18 +18,45 @@ import davidherrerojimenez.brastlewarkgnomes.data.Api;
 public class GnomesPresenterImpl implements GnomesPresenter{
 
     GnomesView gnomesView;
-    Api api;
+    ApiImpl apiImpl;
+
+    String error;
+    List<Brastlewark> gnomishList;
 
     @Inject
-    public GnomesPresenterImpl(GnomesView gnomesView, Api api) {
+    public GnomesPresenterImpl(GnomesView gnomesView, ApiImpl apiImpl) {
         this.gnomesView = gnomesView;
-        this.api = api;
+        this.apiImpl = apiImpl;
     }
 
 
     @Override
     public void loadGnomes() {
-        api.getData();
-        gnomesView.onGnomesLoaded();
+        try {
+            apiImpl.getData();
+            gnomesView.onGnomesLoaded();
+        } catch (Exception e) {
+           handleExceptions(e);
+        }
+
     }
+
+    @Override
+    public List<Brastlewark> getGnomishList() {
+
+        return apiImpl.getBrastlewarkGnomishList();
+    }
+
+    private void handleExceptions(Exception e){
+
+        error = e.getLocalizedMessage();
+
+    }
+
+    public String getMessage(){
+        return error;
+    }
+
+
+
 }
