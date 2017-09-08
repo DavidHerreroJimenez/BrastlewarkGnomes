@@ -14,6 +14,7 @@ import davidherrerojimenez.brastlewarkgnomes.ui.gnomes.GnomesActivity;
 
 import static android.support.test.espresso.Espresso.closeSoftKeyboard;
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.junit.Assert.*;
@@ -41,7 +42,7 @@ public class GnomesFragmentTest {
     @Test
     public void testSearchGnomes() throws Exception{
 
-        onView(withId(R.id.search_gnomes)).perform(typeText(fakeGNomeName), ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.search_filter_gnomes)).perform(click());
     }
 
 }

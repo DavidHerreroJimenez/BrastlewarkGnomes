@@ -7,6 +7,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import davidherrerojimenez.brastlewarkgnomes.ui.detail.DetailActivityComponent;
 import davidherrerojimenez.brastlewarkgnomes.ui.gnomes.GnomesComponent;
 
 /**
@@ -16,7 +17,7 @@ import davidherrerojimenez.brastlewarkgnomes.ui.gnomes.GnomesComponent;
  * Created by dherrero on 7/09/17.
  */
 
-@Module(subcomponents = GnomesComponent.class)
+@Module(subcomponents = {GnomesComponent.class, DetailActivityComponent.class})
 public class AppModule {
 
     @Provides

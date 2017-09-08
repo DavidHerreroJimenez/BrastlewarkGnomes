@@ -7,6 +7,8 @@ import dagger.Module;
 import dagger.android.ActivityKey;
 import dagger.android.AndroidInjector;
 import dagger.multibindings.IntoMap;
+import davidherrerojimenez.brastlewarkgnomes.ui.detail.DetailActivity;
+import davidherrerojimenez.brastlewarkgnomes.ui.detail.DetailActivityComponent;
 import davidherrerojimenez.brastlewarkgnomes.ui.gnomes.GnomesActivity;
 import davidherrerojimenez.brastlewarkgnomes.ui.gnomes.GnomesComponent;
 
@@ -25,5 +27,9 @@ public abstract class ActivityBuilder {
     @ActivityKey(GnomesActivity.class)
     abstract AndroidInjector.Factory<? extends Activity> bindGnomesActivity(GnomesComponent.Builder builder);
 
+    @Binds
+    @IntoMap
+    @ActivityKey(DetailActivity.class)
+    abstract AndroidInjector.Factory<? extends Activity> bindDetailActivity(DetailActivityComponent.Builder builder);
 
 }

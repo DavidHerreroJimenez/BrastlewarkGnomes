@@ -189,7 +189,7 @@ public class GnomesFragment extends Fragment implements GnomesFragmentView{
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_gnomes, menu);
 
-        MenuItem search = menu.findItem(R.id.search);
+        MenuItem search = menu.findItem(R.id.search_filter_gnomes);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(search);
         search(searchView);
 
