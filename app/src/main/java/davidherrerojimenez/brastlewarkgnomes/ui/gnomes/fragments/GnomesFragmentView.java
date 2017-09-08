@@ -1,5 +1,9 @@
 package davidherrerojimenez.brastlewarkgnomes.ui.gnomes.fragments;
 
+import java.util.List;
+
+import davidherrerojimenez.brastlewarkgnomes.model.Brastlewark;
+
 /**
  * Project name: BrastlewarkGnomes
  * Package name: davidherrerojimenez.brastlewarkgnomes.ui.gnomes.fragments
@@ -7,5 +11,7 @@ package davidherrerojimenez.brastlewarkgnomes.ui.gnomes.fragments;
  * Created by dherrero on 7/09/17.
  */
 
-public class GnomesFragmentView {
+public interface GnomesFragmentView {
+
+    void onGnomesFragmentLoaded(List<Brastlewark> brastlewarkList, String message);
 }
