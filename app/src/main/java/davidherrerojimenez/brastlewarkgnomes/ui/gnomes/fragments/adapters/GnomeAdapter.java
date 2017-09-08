@@ -5,16 +5,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import davidherrerojimenez.brastlewarkgnomes.R;
+import davidherrerojimenez.brastlewarkgnomes.data.utils.Utils;
 import davidherrerojimenez.brastlewarkgnomes.model.Brastlewark;
 
 import static davidherrerojimenez.brastlewarkgnomes.data.utils.Utils.listOfStringsToStringFormatted;
@@ -27,10 +31,11 @@ import static davidherrerojimenez.brastlewarkgnomes.data.utils.Utils.listOfStrin
  */
 
 
-public class GnomeAdapter extends RecyclerView.Adapter<GnomeAdapter.ViewHolderAdapterHeroesList> implements View.OnClickListener {
+public class GnomeAdapter extends RecyclerView.Adapter<GnomeAdapter.ViewHolderAdapterHeroesList> implements View.OnClickListener, Filterable {
 
     private Context context;
     private List<Brastlewark> brastlewarkGnomishList;
+    private List<Brastlewark> filteredbrastlewarkGnomishList;
     private View.OnClickListener listener;
 
 
@@ -38,6 +43,7 @@ public class GnomeAdapter extends RecyclerView.Adapter<GnomeAdapter.ViewHolderAd
 
         this.context = context;
         this.brastlewarkGnomishList = brastlewarkGnomishList;
+        this.filteredbrastlewarkGnomishList = brastlewarkGnomishList;
     }
 
     @Override
@@ -53,11 +59,11 @@ public class GnomeAdapter extends RecyclerView.Adapter<GnomeAdapter.ViewHolderAd
     @Override
     public void onBindViewHolder(ViewHolderAdapterHeroesList holder, int position) {
 
-        holder.tvName.setText(brastlewarkGnomishList.get(position).getName().trim());
-        holder.tvDescription.setText(listOfStringsToStringFormatted(brastlewarkGnomishList.get(position).getProfessions()));
+        holder.tvName.setText(filteredbrastlewarkGnomishList.get(position).getName().trim());
+        holder.tvDescription.setText(listOfStringsToStringFormatted(filteredbrastlewarkGnomishList.get(position).getProfessions()));
 
         Picasso.with(context)
-                .load(brastlewarkGnomishList.get(position).getThumbnail())
+                .load(filteredbrastlewarkGnomishList.get(position).getThumbnail())
                 .fit()
                 .into(holder.thumbnailImage);
 
@@ -65,31 +71,27 @@ public class GnomeAdapter extends RecyclerView.Adapter<GnomeAdapter.ViewHolderAd
 
     @Override
     public int getItemCount() {
-        return brastlewarkGnomishList.size();
+        return filteredbrastlewarkGnomishList.size();
     }
 
-    public void setList(List<Brastlewark> newGnomishList){
+    public void setList(List<Brastlewark> newGnomishList) {
 
 
         brastlewarkGnomishList.clear();
         brastlewarkGnomishList.addAll(newGnomishList);
     }
 
-    public void setOnClickListener(View.OnClickListener listener)
-    {
+    public void setOnClickListener(View.OnClickListener listener) {
         this.listener = listener;
     }
 
     @Override
     public void onClick(View view) {
-        if(listener != null) {
+        if (listener != null) {
             listener.onClick(view);
 
         }
     }
-
-
-
 
 
     public class ViewHolderAdapterHeroesList extends RecyclerView.ViewHolder {
@@ -107,6 +109,48 @@ public class GnomeAdapter extends RecyclerView.Adapter<GnomeAdapter.ViewHolderAd
         }
 
 
+    }
+
+    @Override
+    public Filter getFilter() {
+
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+
+                String charString = charSequence.toString();
+
+                if (charString.isEmpty()) {
+
+                    filteredbrastlewarkGnomishList = brastlewarkGnomishList;
+                } else {
+
+                    ArrayList<Brastlewark> filteredList = new ArrayList<>();
+
+                    for (Brastlewark brastlewark : brastlewarkGnomishList) {
+
+                        String professions = Utils.listOfStringsToStringFormatted(brastlewark.getFriends());
+
+                        if (brastlewark.getName().toLowerCase().contains(charString) || (professions).contains(charString)) {
+
+                            filteredList.add(brastlewark);
+                        }
+                    }
+
+                    filteredbrastlewarkGnomishList = filteredList;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filteredbrastlewarkGnomishList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                filteredbrastlewarkGnomishList = (ArrayList<Brastlewark>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 }
 

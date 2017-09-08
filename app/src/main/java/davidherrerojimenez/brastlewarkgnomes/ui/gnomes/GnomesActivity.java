@@ -2,8 +2,12 @@ package davidherrerojimenez.brastlewarkgnomes.ui.gnomes;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +40,9 @@ public class GnomesActivity extends AppCompatActivity implements HasSupportFragm
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        //        setTheme(R.style.AppTheme);
+
         AndroidInjection.inject(this);
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gnomes);
 
@@ -64,4 +69,5 @@ public class GnomesActivity extends AppCompatActivity implements HasSupportFragm
     public AndroidInjector<Fragment> supportFragmentInjector() {
         return fragmentDispatchingAndroidInjector;
     }
+
 }

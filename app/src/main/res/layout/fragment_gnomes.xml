@@ -3,13 +3,6 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/search_gnomes"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/edittext_height"
-        android:minHeight="@dimen/edittext_height"
-        android:textColorHint="@color/colorPrimaryDark"
-        />
 
     <LinearLayout
         android:layout_width="match_parent"

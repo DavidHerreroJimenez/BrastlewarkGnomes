@@ -5,11 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -36,13 +41,11 @@ import davidherrerojimenez.brastlewarkgnomes.ui.gnomes.fragments.adapters.GnomeA
  * Created by dherrero on 7/09/17.
  */
 
-public class GnomesFragment extends Fragment implements GnomesFragmentView, TextWatcher {
+public class GnomesFragment extends Fragment implements GnomesFragmentView{
 
 //    @Inject
 //    GnomesFragmentPresenter gnomesFragmentPresenter;
 
-    @BindView(R.id.search_gnomes)
-    EditText searchGnomesEditText;
 
     @BindView(R.id.gnomes_recyclerview)
     RecyclerView gnomesRecyclerView;
@@ -76,6 +79,12 @@ public class GnomesFragment extends Fragment implements GnomesFragmentView, Text
         super.onAttach(context);
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -92,13 +101,9 @@ public class GnomesFragment extends Fragment implements GnomesFragmentView, Text
         }
 
 
-        searchGnomesEditText.addTextChangedListener(this);
-
         gnomesRecyclerView.setHasFixedSize(true);
 
-//        gnomesFragmentPresenter.showListOrHide(listCharactersFromApi, rvHeroesList, tvEmptyList);
 
-//        gnomesFragmentPresenter.newListIfListIsNull(brastlewarkList);
 
         gnomeAdapter = new GnomeAdapter(getContext(), brastlewarkList);
 
@@ -142,24 +147,6 @@ public class GnomesFragment extends Fragment implements GnomesFragmentView, Text
     }
 
 
-    @Override
-    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-    }
-
-    @Override
-    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        //TODO llamar a lógica que filtra los resultados
-
-    }
-
-    @Override
-    public void afterTextChanged(Editable editable) {
-
-    }
-
-
     public void refreshListAdapter(List<Brastlewark> brastlewarks) {
 
 
@@ -193,5 +180,44 @@ public class GnomesFragment extends Fragment implements GnomesFragmentView, Text
     @Override public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_gnomes, menu);
+
+        MenuItem search = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(search);
+        search(searchView);
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void search(SearchView searchView) {
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                gnomeAdapter.getFilter().filter(newText);
+                return true;
+            }
+        });
     }
 }
