@@ -2,7 +2,6 @@ package davidherrerojimenez.brastlewarkgnomes.ui.detail;
 
 import javax.inject.Inject;
 
-import davidherrerojimenez.brastlewarkgnomes.data.Api;
 import davidherrerojimenez.brastlewarkgnomes.data.ApiImpl;
 
 /**

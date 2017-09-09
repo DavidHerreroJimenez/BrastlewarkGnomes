@@ -1,20 +1,27 @@
 package davidherrerojimenez.brastlewarkgnomes.data;
 
-import com.google.gson.JsonObject;
+import java.util.List;
 
-import davidherrerojimenez.brastlewarkgnomes.model.Gnome;
-import retrofit2.Call;
-import retrofit2.http.GET;
-
-import static davidherrerojimenez.brastlewarkgnomes.data.utils.Constants.FINAL_URL;
+import davidherrerojimenez.brastlewarkgnomes.model.Brastlewark;
 
 /**
- * Proyect: BrastlewarkGnomes.
- * Package name: davidherrerojimenez.brastlewarkgnomes.data.
- * Created by udhj1a on 07/09/2017 15:12.
+ * Project name: BrastlewarkGnomes
+ * Package name: davidherrerojimenez.brastlewarkgnomes.data
+ * <p>
+ * Created by dherrero on 7/09/17.
  */
 
 public interface Api {
-    @GET(FINAL_URL)
-    Call<Gnome> readBrastlewarkGnomes();
+
+    void loadGnomeData(int idGnomeToShow, final ApiCallBack apiCallBack);
+
+    void getGnomishListData(final ApiCallBack apiCallBack);
+
+
+    interface ApiCallBack{
+
+        void onApiCallBack(Object o, String message);
+    }
+
+
 }

@@ -7,8 +7,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
-import static org.junit.Assert.*;
-
 /**
  * Proyect: BrastlewarkGnomes.
  * Package name: davidherrerojimenez.brastlewarkgnomes.data.
@@ -19,7 +17,7 @@ public class ApiImplTest {
     ApiImpl api;
 
     @Mock
-    ApiCallFinished apiCallFinished;
+    Api api;
 
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
@@ -33,7 +31,7 @@ public class ApiImplTest {
     public void getDataFromURL() throws Exception{
 
 
-        api.getData(apiCallFinished);
+        api.getData(api);
     }
 
 }

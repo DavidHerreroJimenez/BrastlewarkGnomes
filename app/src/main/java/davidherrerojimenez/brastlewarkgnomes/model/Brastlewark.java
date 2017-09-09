@@ -11,8 +11,6 @@ import com.google.gson.annotations.SerializedName;
 public class Brastlewark implements Parcelable
 {
 
-    public static final String TAG = "Brastlewark";
-
     @SerializedName("id")
     @Expose
     private Integer id;

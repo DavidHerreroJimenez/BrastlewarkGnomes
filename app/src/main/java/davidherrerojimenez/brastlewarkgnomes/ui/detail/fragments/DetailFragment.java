@@ -12,12 +12,15 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.AndroidSupportInjection;
 import davidherrerojimenez.brastlewarkgnomes.R;
 import davidherrerojimenez.brastlewarkgnomes.data.utils.Utils;
 import davidherrerojimenez.brastlewarkgnomes.model.Brastlewark;
+import davidherrerojimenez.brastlewarkgnomes.ui.utils.Images;
 
 /**
  * Project name: BrastlewarkGnomes
@@ -56,7 +59,18 @@ public class DetailFragment extends Fragment implements DetailFragmentView{
     TextView friendsTextView;
 
 
+
+    DetailFragmentPresenter detailFragmentPresenter;
+
+
     Brastlewark brastlewark;
+
+    public DetailFragment() {
+
+        brastlewark = new Brastlewark();
+
+        detailFragmentPresenter = new DetailFragmentPresenterImpl(this);
+    }
 
     public static DetailFragment newInstance() {
         
@@ -77,28 +91,39 @@ public class DetailFragment extends Fragment implements DetailFragmentView{
 
         Bundle bundle = getArguments();
 
-        brastlewark = bundle.getParcelable(Brastlewark.TAG);
+//        brastlewark = bundle.getParcelable(Brastlewark.TAG);
 
-        setData(brastlewark);
+        int idGnomeToShow = bundle.getInt("idGnome");
+        detailFragmentPresenter.getGnomeDetail(idGnomeToShow);
+
 
         return view;
     }
 
+
+
+    @Override
+    public void onAttach(Context context) {
+        AndroidSupportInjection.inject(this);
+        super.onAttach(context);
+    }
+
+    @Override
+    public void onDetailFragmentLoaded(Brastlewark brastlewark) {
+
+        setData(brastlewark);
+
+    }
+
+
     private void setData(Brastlewark brastlewark){
 
+        loadImage(getContext(), brastlewark.getThumbnail(), imageView);
+
+        idTextView.setText(brastlewark.getId().toString());
 
 
-
-        Picasso.with(getContext())
-                .load(brastlewark.getThumbnail())
-                .fit()
-                .into(imageView);
-
-
-        idTextView.setText(brastlewark.getId());
-
-
-        ageTextView.setText(brastlewark.getAge());
+        ageTextView.setText(brastlewark.getAge().toString());
 
 
         nameTextView.setText(brastlewark.getName());
@@ -120,17 +145,10 @@ public class DetailFragment extends Fragment implements DetailFragmentView{
 
     }
 
-    @Override
-    public void onAttach(Context context) {
-        AndroidSupportInjection.inject(this);
-        super.onAttach(context);
-    }
 
+    private void loadImage(Context context, String thumbnail, ImageView imageView){
 
-    @Override
-    public void onDetailFragmentLoaded() {
-
-
+        Images.loadImage(context, thumbnail, imageView);
 
     }
 }

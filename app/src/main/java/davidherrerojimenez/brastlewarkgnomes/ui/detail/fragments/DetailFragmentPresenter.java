@@ -6,10 +6,11 @@ import davidherrerojimenez.brastlewarkgnomes.model.Brastlewark;
  * Project name: BrastlewarkGnomes
  * Package name: davidherrerojimenez.brastlewarkgnomes.ui.detail.fragments
  * <p>
- * Created by dherrero on 8/09/17.
+ * Created by dherrero on 9/09/17.
  */
 
-public interface DetailFragmentView {
+public interface DetailFragmentPresenter {
 
-    void onDetailFragmentLoaded(Brastlewark brastlewark);
+
+    void getGnomeDetail(int idGnomeToShow);
 }
