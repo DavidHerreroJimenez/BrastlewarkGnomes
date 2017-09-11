@@ -31,7 +31,7 @@
             android:layout_gravity="top|start"
             android:gravity="top|start"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/holo_blue_dark"
+            android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold"
             android:textSize="@dimen/adapter_gnomes_list_font_size_title"/>
 
@@ -41,7 +41,7 @@
             android:gravity="top|start"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/holo_blue_light"
+            android:textColor="@color/colorPrimary"
             android:textStyle="normal"
             android:textSize="@dimen/adapter_gnomes_list_font_size_description"/>
 

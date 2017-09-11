@@ -94,11 +94,11 @@ public class GnomesFragment extends Fragment implements GnomesFragmentView{
         unbinder = ButterKnife.bind(this,view);
 
 
-        if(savedInstanceState != null){
-            brastlewarkList.clear();
-
-            brastlewarkList = savedInstanceState.getParcelableArrayList(Brastlewark.TAG);
-        }
+//        if(savedInstanceState != null){
+//            brastlewarkList.clear();
+//
+//            brastlewarkList = savedInstanceState.getParcelableArrayList(Brastlewark.TAG);
+//        }
 
 
         gnomesRecyclerView.setHasFixedSize(true);
@@ -115,10 +115,18 @@ public class GnomesFragment extends Fragment implements GnomesFragmentView{
 
                 Brastlewark brastlewark = brastlewarkList.get(gnomesRecyclerView.getChildAdapterPosition(view));
 
-                Bundle b = new Bundle();
-                b.putParcelable(Brastlewark.TAG, brastlewark);
+                int idGnome = brastlewark.getId();
 
-                intent.putExtra("bundle", b);
+
+//                Bundle b = new Bundle();
+//                b.putParcelable("gnome", brastlewark);
+
+
+
+//                intent.putExtra("bundle", b);
+
+                intent.putExtra("idGnome", idGnome);
+
 
                 startActivity(intent);
             }
@@ -161,21 +169,21 @@ public class GnomesFragment extends Fragment implements GnomesFragmentView{
 
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-
-        ArrayList<Brastlewark> listToSave = new ArrayList<Brastlewark>();
-
-        if (brastlewarkList != null)
-        listToSave.addAll(brastlewarkList);
-
-        if (outState != null)
-        outState.putParcelableArrayList(Brastlewark.TAG, listToSave);
-
-        super.onSaveInstanceState(outState);
-
-
-    }
+//    @Override
+//    public void onSaveInstanceState(Bundle outState) {
+//
+////        ArrayList<Brastlewark> listToSave = new ArrayList<Brastlewark>();
+////
+////        if (brastlewarkList != null)
+////        listToSave.addAll(brastlewarkList);
+////
+////        if (outState != null)
+////        outState.putParcelableArrayList(Brastlewark.TAG, listToSave);
+//
+//        super.onSaveInstanceState(outState);
+//
+//
+//    }
 
     @Override public void onDestroyView() {
         super.onDestroyView();

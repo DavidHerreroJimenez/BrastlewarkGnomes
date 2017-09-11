@@ -23,7 +23,7 @@ import static davidherrerojimenez.brastlewarkgnomes.data.utils.Constants.OK;
  * Created by dherrero on 6/09/17.
  */
 
-public class ApiImpl {
+public class ApiImpl implements Api {
 
     private List<Brastlewark> brastlewarkGnomishList;
 
@@ -36,53 +36,164 @@ public class ApiImpl {
         brastlewarkGnomishList = new ArrayList<>();
 
         message = "";
-}
+    }
+
+    @Override
+    public void getGnomishListData(ApiCallBack apiCallBack) {
+
+        manageGnomishListCall(getRetrofit(BASE_URL), apiCallBack);
+    }
+
+    @Override
+    public void loadGnomeData(int idGnomeToShow, ApiCallBack apiCallBack) {
+
+        manageGnomDetailCall(getRetrofit(BASE_URL), apiCallBack, idGnomeToShow);
+
+    }
 
 
-    public void getData(final ApiCallFinished apiCallFinished) {
-
-
-
+    private Retrofit getRetrofit(String baseUrl) {
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        Api api = retrofit.create(Api.class);
 
-        Call<Gnome> gnomeCall = api.readBrastlewarkGnomes();
+        return retrofit;
+    }
 
-        gnomeCall.enqueue(new Callback<Gnome>() {
+    private void manageGnomishListCall(Retrofit retrofit, final ApiCallBack apiCallBack){
+
+        Call<Gnome> gnomeCall = (Call<Gnome>) getRetrofitCall(retrofit);
+
+        gnomeCall.enqueue(getRetrofitCallBack(apiCallBack));
+    }
+
+    private void manageGnomDetailCall(Retrofit retrofit, ApiCallBack apiCallBack, int idGnomeToShow){
+
+        Call<Gnome> gnomeCall = (Call<Gnome>) getRetrofitCall(retrofit);
+
+        gnomeCall.enqueue(getRetrofitCallBack(apiCallBack, idGnomeToShow));
+    }
+
+    private Call<?> getRetrofitCall(Retrofit retrofit) {
+
+        ApiRetrofitInterface apiRetrofitInterface = retrofit.create(ApiRetrofitInterface.class);
+
+        Call<?> call = apiRetrofitInterface.readBrastlewarkGnomes();
+
+        return call;
+    }
+
+    private Callback getRetrofitCallBack(final ApiCallBack apiCallBack) {
+
+
+        Callback callback = new Callback() {
+
             @Override
-            public void onResponse(Call<Gnome> call, Response<Gnome> response) {
+            public void onResponse(Call call, Response response) {
 
-                brastlewarkGnomishList = new ArrayList<>();
-
-                if (response.code() == OK) {
-                    brastlewarkGnomishList = response.body().getBrastlewark();
-                }
-
-                message = response.message();
-
-
-                apiCallFinished.onApiCallsFinished(brastlewarkGnomishList,message);
+                addresponseToOnApiCallBack(response, apiCallBack);
 
 
             }
 
             @Override
-            public void onFailure(Call<Gnome> call, Throwable t) {
+            public void onFailure(Call call, Throwable t) {
 
-                message = t.toString();
-
-                brastlewarkGnomishList = new ArrayList<>();
-
-                apiCallFinished.onApiCallsFinished(brastlewarkGnomishList,message);
+                addFailureToOnApiCallBack(t, apiCallBack);
 
             }
-        });
+        };
+
+
+        return callback;
 
     }
+
+    private Callback getRetrofitCallBack(final ApiCallBack apiCallBack, final int idGnomeToShow) {
+
+
+        Callback callback = new Callback() {
+
+            @Override
+            public void onResponse(Call call, Response response) {
+
+                addresponseToOnApiCallBack(response, apiCallBack, idGnomeToShow);
+
+
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+
+                addFailureToOnApiCallBack(t, apiCallBack);
+
+            }
+        };
+
+
+        return callback;
+
+    }
+
+    private void addresponseToOnApiCallBack(Response<Gnome> response, ApiCallBack apiCallBack) {
+
+        apiCallBack.onApiCallBack(getGnomishList(response), getMessageOfGnomeResponse(response));
+
+    }
+
+    private void addresponseToOnApiCallBack(Response<Gnome> response, ApiCallBack apiCallBack, int idGnome) {
+
+        apiCallBack.onApiCallBack(getGnomeDetail(response, idGnome), getMessageOfGnomeResponse(response));
+
+    }
+
+    private void addFailureToOnApiCallBack(Throwable t, ApiCallBack apiCallBack) {
+
+        apiCallBack.onApiCallBack(new ArrayList<Brastlewark>(), getMessageOfThrowable(t));
+
+    }
+
+
+    private List<Brastlewark> getGnomishList(Response<Gnome> gnomeResponse) {
+
+        brastlewarkGnomishList = new ArrayList<>();
+
+        if (gnomeResponse.code() == OK) {
+            brastlewarkGnomishList = gnomeResponse.body().getBrastlewark();
+        }
+
+        return brastlewarkGnomishList;
+    }
+
+    private Brastlewark getGnomeDetail(Response<Gnome> gnomeResponse, int idGnome){
+
+        Brastlewark brastlewark = new Brastlewark();
+
+        if (gnomeResponse.code() == OK) {
+            brastlewark = gnomeResponse.body().getBrastlewark().get(idGnome);
+        }
+
+        return brastlewark;
+
+    }
+
+    private String getMessageOfGnomeResponse(Response<Gnome> gnomeResponse) {
+
+        message = gnomeResponse.message();
+
+        return message;
+
+    }
+
+    private String getMessageOfThrowable(Throwable t) {
+
+        message = t.toString();
+
+        return message;
+    }
+
 
 }
