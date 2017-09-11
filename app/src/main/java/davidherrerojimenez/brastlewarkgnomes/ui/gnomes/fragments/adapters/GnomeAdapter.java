@@ -19,7 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import davidherrerojimenez.brastlewarkgnomes.R;
 import davidherrerojimenez.brastlewarkgnomes.data.utils.Utils;
-import davidherrerojimenez.brastlewarkgnomes.model.Brastlewark;
+import davidherrerojimenez.brastlewarkgnomes.model.Gnome;
 
 import static davidherrerojimenez.brastlewarkgnomes.data.utils.Utils.listOfStringsToStringFormatted;
 
@@ -34,16 +34,16 @@ import static davidherrerojimenez.brastlewarkgnomes.data.utils.Utils.listOfStrin
 public class GnomeAdapter extends RecyclerView.Adapter<GnomeAdapter.ViewHolderAdapterHeroesList> implements View.OnClickListener, Filterable {
 
     private Context context;
-    private List<Brastlewark> brastlewarkGnomishList;
-    private List<Brastlewark> filteredbrastlewarkGnomishList;
+    private List<Gnome> gnomeGnomishList;
+    private List<Gnome> filteredbrastlewarkGnomishList;
     private View.OnClickListener listener;
 
 
-    public GnomeAdapter(Context context, List<Brastlewark> brastlewarkGnomishList) {
+    public GnomeAdapter(Context context, List<Gnome> gnomeGnomishList) {
 
         this.context = context;
-        this.brastlewarkGnomishList = brastlewarkGnomishList;
-        this.filteredbrastlewarkGnomishList = brastlewarkGnomishList;
+        this.gnomeGnomishList = gnomeGnomishList;
+        this.filteredbrastlewarkGnomishList = gnomeGnomishList;
     }
 
     @Override
@@ -74,11 +74,11 @@ public class GnomeAdapter extends RecyclerView.Adapter<GnomeAdapter.ViewHolderAd
         return filteredbrastlewarkGnomishList.size();
     }
 
-    public void setList(List<Brastlewark> newGnomishList) {
+    public void setList(List<Gnome> newGnomishList) {
 
 
-        brastlewarkGnomishList.clear();
-        brastlewarkGnomishList.addAll(newGnomishList);
+        gnomeGnomishList.clear();
+        gnomeGnomishList.addAll(newGnomishList);
     }
 
     public void setOnClickListener(View.OnClickListener listener) {
@@ -122,18 +122,18 @@ public class GnomeAdapter extends RecyclerView.Adapter<GnomeAdapter.ViewHolderAd
 
                 if (charString.isEmpty()) {
 
-                    filteredbrastlewarkGnomishList = brastlewarkGnomishList;
+                    filteredbrastlewarkGnomishList = gnomeGnomishList;
                 } else {
 
-                    ArrayList<Brastlewark> filteredList = new ArrayList<>();
+                    ArrayList<Gnome> filteredList = new ArrayList<>();
 
-                    for (Brastlewark brastlewark : brastlewarkGnomishList) {
+                    for (Gnome gnome : gnomeGnomishList) {
 
-                        String professions = Utils.listOfStringsToStringFormatted(brastlewark.getFriends());
+                        String professions = Utils.listOfStringsToStringFormatted(gnome.getFriends());
 
-                        if (brastlewark.getName().toLowerCase().contains(charString) || (professions).contains(charString)) {
+                        if (gnome.getName().toLowerCase().contains(charString) || (professions).contains(charString)) {
 
-                            filteredList.add(brastlewark);
+                            filteredList.add(gnome);
                         }
                     }
 
@@ -147,7 +147,7 @@ public class GnomeAdapter extends RecyclerView.Adapter<GnomeAdapter.ViewHolderAd
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                filteredbrastlewarkGnomishList = (ArrayList<Brastlewark>) filterResults.values;
+                filteredbrastlewarkGnomishList = (ArrayList<Gnome>) filterResults.values;
                 notifyDataSetChanged();
             }
         };

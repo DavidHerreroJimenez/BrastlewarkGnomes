@@ -1,7 +1,6 @@
 package davidherrerojimenez.brastlewarkgnomes.ui.detail;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +12,6 @@ import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 import davidherrerojimenez.brastlewarkgnomes.R;
-import davidherrerojimenez.brastlewarkgnomes.model.Brastlewark;
 import davidherrerojimenez.brastlewarkgnomes.ui.detail.fragments.DetailFragment;
 
 /**
@@ -33,8 +31,6 @@ public class DetailActivity extends AppCompatActivity implements HasSupportFragm
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-
-//        Bundle bundle = getIntent().getBundleExtra("bundle");
 
         Bundle bundle = getIntent().getExtras();
 

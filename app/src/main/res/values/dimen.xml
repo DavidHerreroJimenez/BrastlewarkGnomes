@@ -17,5 +17,6 @@
 
     <dimen name="adapter_gnomes_list_font_size_title">16sp</dimen>
     <dimen name="adapter_gnomes_list_font_size_description">12sp</dimen>
+    <dimen name="gnome_detail_name_font_size">24sp</dimen>
     
 </resources>

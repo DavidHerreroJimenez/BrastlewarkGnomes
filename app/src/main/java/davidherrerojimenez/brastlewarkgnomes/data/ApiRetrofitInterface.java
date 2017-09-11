@@ -1,8 +1,6 @@
 package davidherrerojimenez.brastlewarkgnomes.data;
 
-import com.google.gson.JsonObject;
-
-import davidherrerojimenez.brastlewarkgnomes.model.Gnome;
+import davidherrerojimenez.brastlewarkgnomes.model.BrastlewarkGnomes;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
@@ -16,5 +14,5 @@ import static davidherrerojimenez.brastlewarkgnomes.data.utils.Constants.FINAL_U
 
 public interface ApiRetrofitInterface {
     @GET(FINAL_URL)
-    Call<Gnome> readBrastlewarkGnomes();
+    Call<BrastlewarkGnomes> readBrastlewarkGnomes();
 }

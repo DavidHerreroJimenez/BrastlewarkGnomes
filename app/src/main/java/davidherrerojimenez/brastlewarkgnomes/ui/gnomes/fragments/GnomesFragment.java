@@ -9,15 +9,12 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -30,7 +27,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import dagger.android.support.AndroidSupportInjection;
 import davidherrerojimenez.brastlewarkgnomes.R;
-import davidherrerojimenez.brastlewarkgnomes.model.Brastlewark;
+import davidherrerojimenez.brastlewarkgnomes.model.Gnome;
 import davidherrerojimenez.brastlewarkgnomes.ui.detail.DetailActivity;
 import davidherrerojimenez.brastlewarkgnomes.ui.gnomes.fragments.adapters.GnomeAdapter;
 
@@ -43,9 +40,6 @@ import davidherrerojimenez.brastlewarkgnomes.ui.gnomes.fragments.adapters.GnomeA
 
 public class GnomesFragment extends Fragment implements GnomesFragmentView{
 
-//    @Inject
-//    GnomesFragmentPresenter gnomesFragmentPresenter;
-
 
     @BindView(R.id.gnomes_recyclerview)
     RecyclerView gnomesRecyclerView;
@@ -53,14 +47,14 @@ public class GnomesFragment extends Fragment implements GnomesFragmentView{
     @BindView(R.id.empty_list_textview)
     TextView emptyListtextView;
 
-    private static List<Brastlewark> brastlewarkList;
+    private static List<Gnome> gnomeList;
     private String message;
     private static GnomeAdapter gnomeAdapter;
     private Unbinder unbinder;
 
     @Inject
     public GnomesFragment() {
-        brastlewarkList = new ArrayList<>();
+        gnomeList = new ArrayList<>();
     }
 
     public static GnomesFragment newInstance() {
@@ -94,18 +88,11 @@ public class GnomesFragment extends Fragment implements GnomesFragmentView{
         unbinder = ButterKnife.bind(this,view);
 
 
-//        if(savedInstanceState != null){
-//            brastlewarkList.clear();
-//
-//            brastlewarkList = savedInstanceState.getParcelableArrayList(Brastlewark.TAG);
-//        }
-
-
         gnomesRecyclerView.setHasFixedSize(true);
 
 
 
-        gnomeAdapter = new GnomeAdapter(getContext(), brastlewarkList);
+        gnomeAdapter = new GnomeAdapter(getContext(), gnomeList);
 
         gnomeAdapter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,17 +100,9 @@ public class GnomesFragment extends Fragment implements GnomesFragmentView{
 
                 Intent intent = new Intent(getActivity(), DetailActivity.class);
 
-                Brastlewark brastlewark = brastlewarkList.get(gnomesRecyclerView.getChildAdapterPosition(view));
+                Gnome gnome = gnomeList.get(gnomesRecyclerView.getChildAdapterPosition(view));
 
-                int idGnome = brastlewark.getId();
-
-
-//                Bundle b = new Bundle();
-//                b.putParcelable("gnome", brastlewark);
-
-
-
-//                intent.putExtra("bundle", b);
+                int idGnome = gnome.getId();
 
                 intent.putExtra("idGnome", idGnome);
 
@@ -144,23 +123,23 @@ public class GnomesFragment extends Fragment implements GnomesFragmentView{
     }
 
     @Override
-    public void onGnomesFragmentLoaded(List<Brastlewark> brastlewarkList, String message) {
+    public void onGnomesFragmentLoaded(List<Gnome> gnomeList, String message) {
 
-        this.brastlewarkList = brastlewarkList;
+        this.gnomeList = gnomeList;
 
         this.message = message;
 
-        refreshListAdapter(brastlewarkList);
+        refreshListAdapter(gnomeList);
 
     }
 
 
-    public void refreshListAdapter(List<Brastlewark> brastlewarks) {
+    public void refreshListAdapter(List<Gnome> gnomes) {
 
 
         if(gnomeAdapter != null) {
-            this.brastlewarkList = brastlewarks;
-            gnomeAdapter.setList(brastlewarkList);
+            this.gnomeList = gnomes;
+            gnomeAdapter.setList(gnomeList);
             gnomeAdapter.notifyDataSetChanged();
 
 
@@ -169,21 +148,6 @@ public class GnomesFragment extends Fragment implements GnomesFragmentView{
 
     }
 
-//    @Override
-//    public void onSaveInstanceState(Bundle outState) {
-//
-////        ArrayList<Brastlewark> listToSave = new ArrayList<Brastlewark>();
-////
-////        if (brastlewarkList != null)
-////        listToSave.addAll(brastlewarkList);
-////
-////        if (outState != null)
-////        outState.putParcelableArrayList(Brastlewark.TAG, listToSave);
-//
-//        super.onSaveInstanceState(outState);
-//
-//
-//    }
 
     @Override public void onDestroyView() {
         super.onDestroyView();

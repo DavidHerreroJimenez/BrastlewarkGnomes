@@ -2,7 +2,7 @@ package davidherrerojimenez.brastlewarkgnomes.ui.gnomes;
 
 import java.util.List;
 
-import davidherrerojimenez.brastlewarkgnomes.model.Brastlewark;
+import davidherrerojimenez.brastlewarkgnomes.model.Gnome;
 
 /**
  * Project name: BrastlewarkGnomes
@@ -13,5 +13,5 @@ import davidherrerojimenez.brastlewarkgnomes.model.Brastlewark;
 
 public interface GnomesView {
 
-    void onGnomesLoaded(List<Brastlewark> brastlewarks, String message);
+    void onGnomesLoaded(List<Gnome> gnomes, String message);
 }
