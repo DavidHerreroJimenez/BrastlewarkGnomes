@@ -64,8 +64,8 @@ public class DetailFragment extends Fragment implements DetailFragmentView{
     TabHost tabHost;
 
 
-
-    DetailFragmentPresenter detailFragmentPresenter;
+    @Inject
+    DetailFragmentPresenterImpl detailFragmentPresenter;
 
 
     Brastlewark brastlewark;
@@ -77,7 +77,7 @@ public class DetailFragment extends Fragment implements DetailFragmentView{
 
         brastlewark = new Brastlewark();
 
-        detailFragmentPresenter = new DetailFragmentPresenterImpl(this);
+//        detailFragmentPresenter = new DetailFragmentPresenterImpl(this);
     }
 
     public static DetailFragment newInstance() {
@@ -98,8 +98,6 @@ public class DetailFragment extends Fragment implements DetailFragmentView{
         ButterKnife.bind(this, view);
 
         Bundle bundle = getArguments();
-
-//        brastlewark = bundle.getParcelable(Brastlewark.TAG);
 
         int idGnomeToShow = bundle.getInt("idGnome");
         detailFragmentPresenter.getGnomeDetail(idGnomeToShow);
@@ -125,6 +123,7 @@ public class DetailFragment extends Fragment implements DetailFragmentView{
 
 
     private void setData(Brastlewark brastlewark){
+
 
         loadImage(getContext(), brastlewark.getThumbnail(), imageView);
 

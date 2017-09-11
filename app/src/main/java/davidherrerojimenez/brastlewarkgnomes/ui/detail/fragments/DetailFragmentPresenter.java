@@ -12,5 +12,7 @@ import davidherrerojimenez.brastlewarkgnomes.model.Brastlewark;
 public interface DetailFragmentPresenter {
 
 
+
+
     void getGnomeDetail(int idGnomeToShow);
 }
