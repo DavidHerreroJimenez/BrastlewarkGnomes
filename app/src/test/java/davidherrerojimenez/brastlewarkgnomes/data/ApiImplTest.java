@@ -14,10 +14,11 @@ import org.mockito.junit.MockitoRule;
  */
 public class ApiImplTest {
 
-    ApiImpl api;
-
     @Mock
     Api api;
+
+    @Mock
+    Api.ApiCallBack apiCallBack;
 
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
@@ -25,13 +26,13 @@ public class ApiImplTest {
     @Before
     public void setUp() throws Exception {
         api = new ApiImpl();
+
     }
 
     @Test
     public void getDataFromURL() throws Exception{
 
-
-        api.getData(api);
+        api.getGnomishListData(apiCallBack);
     }
 
 }
