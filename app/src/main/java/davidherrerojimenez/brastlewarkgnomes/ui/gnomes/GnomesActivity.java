@@ -40,9 +40,8 @@ public class GnomesActivity extends AppCompatActivity implements HasSupportFragm
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
-        AndroidInjection.inject(this);
         setTheme(R.style.AppTheme);
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gnomes);
 

@@ -153,18 +153,18 @@ public class DetailFragment extends Fragment implements DetailFragmentView{
 
         TabHost.TabSpec spec = tabHost.newTabSpec("tab1");
         spec.setContent(R.id.tab1);
-        spec.setIndicator("", res.getDrawable(R.drawable.ic_assignment_ind_black_48dp));
+        spec.setIndicator("", res.getDrawable(R.drawable.ic_assignment_ind_black_24dp));
 
         tabHost.addTab(spec);
 
         spec=tabHost.newTabSpec("tab2");
         spec.setContent(R.id.tab2);
-        spec.setIndicator("", res.getDrawable(R.drawable.ic_group_black_48dp));
+        spec.setIndicator("", res.getDrawable(R.drawable.ic_group_black_24dp));
         tabHost.addTab(spec);
 
         spec=tabHost.newTabSpec("tab3");
         spec.setContent(R.id.tab3);
-        spec.setIndicator("", res.getDrawable(R.drawable.ic_work_black_48dp));
+        spec.setIndicator("", res.getDrawable(R.drawable.ic_work_black_24dp));
         tabHost.addTab(spec);
 
         tabHost.setCurrentTab(0);
