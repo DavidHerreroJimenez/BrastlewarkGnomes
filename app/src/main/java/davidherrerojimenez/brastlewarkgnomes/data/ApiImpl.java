@@ -5,16 +5,15 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import davidherrerojimenez.brastlewarkgnomes.model.Brastlewark;
 import davidherrerojimenez.brastlewarkgnomes.model.Gnome;
+import davidherrerojimenez.brastlewarkgnomes.model.BrastlewarkGnomes;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static davidherrerojimenez.brastlewarkgnomes.data.utils.Constants.BASE_URL;
-import static davidherrerojimenez.brastlewarkgnomes.data.utils.Constants.OK;
+import static davidherrerojimenez.brastlewarkgnomes.data.utils.Constants.*;
 
 /**
  * Project name: BrastlewarkGnomes
@@ -25,7 +24,8 @@ import static davidherrerojimenez.brastlewarkgnomes.data.utils.Constants.OK;
 
 public class ApiImpl implements Api {
 
-    private List<Brastlewark> brastlewarkGnomishList;
+
+    private List<Gnome> gnomeGnomishList;
 
 
     String message;
@@ -33,7 +33,7 @@ public class ApiImpl implements Api {
     @Inject
     public ApiImpl() {
 
-        brastlewarkGnomishList = new ArrayList<>();
+        gnomeGnomishList = new ArrayList<>();
 
         message = "";
     }
@@ -65,14 +65,14 @@ public class ApiImpl implements Api {
 
     private void manageGnomishListCall(Retrofit retrofit, final ApiCallBack apiCallBack){
 
-        Call<Gnome> gnomeCall = (Call<Gnome>) getRetrofitCall(retrofit);
+        Call<BrastlewarkGnomes> gnomeCall = (Call<BrastlewarkGnomes>) getRetrofitCall(retrofit);
 
         gnomeCall.enqueue(getRetrofitCallBack(apiCallBack));
     }
 
     private void manageGnomDetailCall(Retrofit retrofit, ApiCallBack apiCallBack, int idGnomeToShow){
 
-        Call<Gnome> gnomeCall = (Call<Gnome>) getRetrofitCall(retrofit);
+        Call<BrastlewarkGnomes> gnomeCall = (Call<BrastlewarkGnomes>) getRetrofitCall(retrofit);
 
         gnomeCall.enqueue(getRetrofitCallBack(apiCallBack, idGnomeToShow));
     }
@@ -138,13 +138,13 @@ public class ApiImpl implements Api {
 
     }
 
-    private void addresponseToOnApiCallBack(Response<Gnome> response, ApiCallBack apiCallBack) {
+    private void addresponseToOnApiCallBack(Response<BrastlewarkGnomes> response, ApiCallBack apiCallBack) {
 
         apiCallBack.onApiCallBack(getGnomishList(response), getMessageOfGnomeResponse(response));
 
     }
 
-    private void addresponseToOnApiCallBack(Response<Gnome> response, ApiCallBack apiCallBack, int idGnome) {
+    private void addresponseToOnApiCallBack(Response<BrastlewarkGnomes> response, ApiCallBack apiCallBack, int idGnome) {
 
         apiCallBack.onApiCallBack(getGnomeDetail(response, idGnome), getMessageOfGnomeResponse(response));
 
@@ -152,35 +152,35 @@ public class ApiImpl implements Api {
 
     private void addFailureToOnApiCallBack(Throwable t, ApiCallBack apiCallBack) {
 
-        apiCallBack.onApiCallBack(new ArrayList<Brastlewark>(), getMessageOfThrowable(t));
+        apiCallBack.onApiCallBack(new ArrayList<Gnome>(), getMessageOfThrowable(t));
 
     }
 
 
-    private List<Brastlewark> getGnomishList(Response<Gnome> gnomeResponse) {
+    private List<Gnome> getGnomishList(Response<BrastlewarkGnomes> gnomeResponse) {
 
-        brastlewarkGnomishList = new ArrayList<>();
+        gnomeGnomishList = new ArrayList<>();
 
         if (gnomeResponse.code() == OK) {
-            brastlewarkGnomishList = gnomeResponse.body().getBrastlewark();
+            gnomeGnomishList = gnomeResponse.body().getGnome();
         }
 
-        return brastlewarkGnomishList;
+        return gnomeGnomishList;
     }
 
-    private Brastlewark getGnomeDetail(Response<Gnome> gnomeResponse, int idGnome){
+    private Gnome getGnomeDetail(Response<BrastlewarkGnomes> gnomeResponse, int idGnome){
 
-        Brastlewark brastlewark = new Brastlewark();
+        Gnome gnome = new Gnome();
 
         if (gnomeResponse.code() == OK) {
-            brastlewark = gnomeResponse.body().getBrastlewark().get(idGnome);
+            gnome = gnomeResponse.body().getGnome().get(idGnome);
         }
 
-        return brastlewark;
+        return gnome;
 
     }
 
-    private String getMessageOfGnomeResponse(Response<Gnome> gnomeResponse) {
+    private String getMessageOfGnomeResponse(Response<BrastlewarkGnomes> gnomeResponse) {
 
         message = gnomeResponse.message();
 

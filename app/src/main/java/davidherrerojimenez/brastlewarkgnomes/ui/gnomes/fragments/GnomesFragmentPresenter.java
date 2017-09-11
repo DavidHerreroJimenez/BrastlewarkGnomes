@@ -17,6 +17,5 @@ public class GnomesFragmentPresenter {
     @Inject
     public GnomesFragmentPresenter(GnomesFragmentView gnomesFragmentView) {
         this.gnomesFragmentView = gnomesFragmentView;
-//        gnomesFragmentView.onGnomesFragmentLoaded();
     }
 }

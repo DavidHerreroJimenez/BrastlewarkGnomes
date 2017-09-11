@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 import davidherrerojimenez.brastlewarkgnomes.data.Api;
 import davidherrerojimenez.brastlewarkgnomes.data.ApiImpl;
-import davidherrerojimenez.brastlewarkgnomes.model.Brastlewark;
+import davidherrerojimenez.brastlewarkgnomes.model.Gnome;
 
 /**
  * Project name: BrastlewarkGnomes
@@ -21,7 +21,7 @@ public class GnomesPresenterImpl implements GnomesPresenter, Api.ApiCallBack {
     ApiImpl apiImpl;
 
     String error;
-    List<Brastlewark> gnomishList;
+    List<Gnome> gnomishList;
 
     @Inject
     public GnomesPresenterImpl(GnomesView gnomesView, ApiImpl apiImpl) {
@@ -51,7 +51,7 @@ public class GnomesPresenterImpl implements GnomesPresenter, Api.ApiCallBack {
     @Override
     public void onApiCallBack(Object o, String message) {
 
-        gnomesView.onGnomesLoaded((List<Brastlewark>) o,message);
+        gnomesView.onGnomesLoaded((List<Gnome>) o,message);
 
     }
 }

@@ -1,9 +1,5 @@
 package davidherrerojimenez.brastlewarkgnomes.data;
 
-import java.util.List;
-
-import davidherrerojimenez.brastlewarkgnomes.model.Brastlewark;
-
 /**
  * Project name: BrastlewarkGnomes
  * Package name: davidherrerojimenez.brastlewarkgnomes.data

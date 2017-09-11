@@ -1,7 +1,5 @@
 package davidherrerojimenez.brastlewarkgnomes.ui.detail.fragments;
 
-import davidherrerojimenez.brastlewarkgnomes.model.Brastlewark;
-
 /**
  * Project name: BrastlewarkGnomes
  * Package name: davidherrerojimenez.brastlewarkgnomes.ui.detail.fragments

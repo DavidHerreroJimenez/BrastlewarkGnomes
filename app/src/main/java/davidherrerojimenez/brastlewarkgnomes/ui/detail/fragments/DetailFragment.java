@@ -5,7 +5,6 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,16 +14,13 @@ import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.AndroidSupportInjection;
 import davidherrerojimenez.brastlewarkgnomes.R;
-import davidherrerojimenez.brastlewarkgnomes.data.utils.Utils;
-import davidherrerojimenez.brastlewarkgnomes.model.Brastlewark;
+import davidherrerojimenez.brastlewarkgnomes.model.Gnome;
 import davidherrerojimenez.brastlewarkgnomes.ui.utils.Images;
 
 /**
@@ -68,16 +64,14 @@ public class DetailFragment extends Fragment implements DetailFragmentView{
     DetailFragmentPresenterImpl detailFragmentPresenter;
 
 
-    Brastlewark brastlewark;
+    Gnome gnome;
 
     ArrayAdapter<String> professionsAdapter;
     ArrayAdapter<String> friendsAdapter;
 
     public DetailFragment() {
 
-        brastlewark = new Brastlewark();
-
-//        detailFragmentPresenter = new DetailFragmentPresenterImpl(this);
+        gnome = new Gnome();
     }
 
     public static DetailFragment newInstance() {
@@ -115,32 +109,32 @@ public class DetailFragment extends Fragment implements DetailFragmentView{
     }
 
     @Override
-    public void onDetailFragmentLoaded(Brastlewark brastlewark) {
+    public void onDetailFragmentLoaded(Gnome gnome) {
 
-        setData(brastlewark);
+        setData(gnome);
 
     }
 
 
-    private void setData(Brastlewark brastlewark){
+    private void setData(Gnome gnome){
 
 
-        loadImage(getContext(), brastlewark.getThumbnail(), imageView);
+        loadImage(getContext(), gnome.getThumbnail(), imageView);
 
 
-        ageTextView.setText(brastlewark.getAge().toString());
+        ageTextView.setText(gnome.getAge().toString());
 
 
-        nameTextView.setText(brastlewark.getName());
+        nameTextView.setText(gnome.getName());
 
 
-        weightTextView.setText(brastlewark.getWeight().toString());
+        weightTextView.setText(gnome.getWeight().toString());
 
 
-        heightTextView.setText(brastlewark.getHeight().toString());
+        heightTextView.setText(gnome.getHeight().toString());
 
 
-        hairTextView.setText(brastlewark.getHairColor());
+        hairTextView.setText(gnome.getHairColor());
 
 
         tabHost.setup();
@@ -171,7 +165,7 @@ public class DetailFragment extends Fragment implements DetailFragmentView{
 
 
         int[] toViews = {android.R.id.text1};
-        String[] fromColumns = brastlewark.getProfessions().toArray(new String[0]);
+        String[] fromColumns = gnome.getProfessions().toArray(new String[0]);
 
 
         professionsAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_expandable_list_item_1,fromColumns);
@@ -179,7 +173,7 @@ public class DetailFragment extends Fragment implements DetailFragmentView{
         professionListView.setAdapter(professionsAdapter);
 
 
-        String[] fromFriendsColumns = brastlewark.getFriends().toArray(new String[0]);
+        String[] fromFriendsColumns = gnome.getFriends().toArray(new String[0]);
 
 
         friendsAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_expandable_list_item_1,fromFriendsColumns);
