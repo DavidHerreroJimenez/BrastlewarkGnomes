@@ -159,6 +159,8 @@ public class GnomesFragment extends Fragment implements GnomesFragmentView{
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+        menu.clear();
         inflater.inflate(R.menu.menu_gnomes, menu);
 
         MenuItem search = menu.findItem(R.id.search_filter_gnomes);
