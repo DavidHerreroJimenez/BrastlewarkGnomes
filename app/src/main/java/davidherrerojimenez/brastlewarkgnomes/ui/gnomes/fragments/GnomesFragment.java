@@ -66,12 +66,6 @@ public class GnomesFragment extends BaseFragment implements GnomesFragmentView{
         return fragment;
     }
 
-    @Override
-    public void onAttach(Context context) {
-
-        AndroidSupportInjection.inject(this);
-        super.onAttach(context);
-    }
 
     @Override
     protected void setView(){

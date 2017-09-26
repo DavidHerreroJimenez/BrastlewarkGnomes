@@ -1,6 +1,7 @@
 package davidherrerojimenez.brastlewarkgnomes.ui.detail.fragments;
 
 import davidherrerojimenez.brastlewarkgnomes.model.Gnome;
+import davidherrerojimenez.brastlewarkgnomes.model.GnomeToPrint;
 
 /**
  * Project name: BrastlewarkGnomes
@@ -11,5 +12,5 @@ import davidherrerojimenez.brastlewarkgnomes.model.Gnome;
 
 public interface DetailFragmentView {
 
-    void onDetailFragmentLoaded(Gnome gnome);
+    void onDetailFragmentLoaded(GnomeToPrint gnomeToPrint);
 }
