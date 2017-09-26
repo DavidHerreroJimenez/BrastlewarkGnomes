@@ -19,6 +19,7 @@ public class Images {
         Picasso.with(context)
                 .load(thumbnail)
                 .fit()
+                .centerInside()
                 .into(imageView);
 
     }
