@@ -20,6 +20,7 @@ import butterknife.ButterKnife;
 import davidherrerojimenez.brastlewarkgnomes.R;
 import davidherrerojimenez.brastlewarkgnomes.data.utils.Utils;
 import davidherrerojimenez.brastlewarkgnomes.model.Gnome;
+import davidherrerojimenez.brastlewarkgnomes.ui.utils.Images;
 
 import static davidherrerojimenez.brastlewarkgnomes.data.utils.Utils.listOfStringsToStringFormatted;
 
@@ -61,11 +62,8 @@ public class GnomeAdapter extends RecyclerView.Adapter<GnomeAdapter.ViewHolderAd
 
         holder.tvName.setText(filteredbrastlewarkGnomishList.get(position).getName().trim());
         holder.tvDescription.setText(listOfStringsToStringFormatted(filteredbrastlewarkGnomishList.get(position).getProfessions()));
-
-        Picasso.with(context)
-                .load(filteredbrastlewarkGnomishList.get(position).getThumbnail())
-                .fit()
-                .into(holder.thumbnailImage);
+        
+        Images.loadImage(context, filteredbrastlewarkGnomishList.get(position).getThumbnail(), holder.thumbnailImage);
 
     }
 
@@ -118,7 +116,7 @@ public class GnomeAdapter extends RecyclerView.Adapter<GnomeAdapter.ViewHolderAd
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
 
-                String charString = charSequence.toString();
+                String charString = charSequence.toString().trim().toLowerCase();
 
                 if (charString.isEmpty()) {
 
@@ -129,9 +127,10 @@ public class GnomeAdapter extends RecyclerView.Adapter<GnomeAdapter.ViewHolderAd
 
                     for (Gnome gnome : gnomeGnomishList) {
 
-                        String professions = Utils.listOfStringsToStringFormatted(gnome.getFriends());
+                        String professions = Utils.listOfStringsToStringFormatted(gnome.getProfessions());
 
-                        if (gnome.getName().toLowerCase().contains(charString) || (professions).contains(charString)) {
+                        if (gnome.getName().trim().toLowerCase().contains(charString)
+                                || (professions).trim().toLowerCase().contains(charString)) {
 
                             filteredList.add(gnome);
                         }

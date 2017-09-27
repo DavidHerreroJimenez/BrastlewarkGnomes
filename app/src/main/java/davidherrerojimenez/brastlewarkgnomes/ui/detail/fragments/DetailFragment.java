@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -21,6 +22,8 @@ import butterknife.ButterKnife;
 import dagger.android.support.AndroidSupportInjection;
 import davidherrerojimenez.brastlewarkgnomes.R;
 import davidherrerojimenez.brastlewarkgnomes.model.Gnome;
+import davidherrerojimenez.brastlewarkgnomes.model.GnomeToPrint;
+import davidherrerojimenez.brastlewarkgnomes.ui.base.BaseFragment;
 import davidherrerojimenez.brastlewarkgnomes.ui.utils.Images;
 
 /**
@@ -30,7 +33,7 @@ import davidherrerojimenez.brastlewarkgnomes.ui.utils.Images;
  * Created by dherrero on 8/09/17.
  */
 
-public class DetailFragment extends Fragment implements DetailFragmentView{
+public class DetailFragment extends BaseFragment implements DetailFragmentView{
 
     @BindView(R.id.detail_image_gnome)
     ImageView imageView;
@@ -83,63 +86,26 @@ public class DetailFragment extends Fragment implements DetailFragmentView{
         return fragment;
     }
 
-
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_detail_constraint, container, false);
+    public void onDetailFragmentLoaded(GnomeToPrint gnomeToPrint) {
 
-        ButterKnife.bind(this, view);
-
-        Bundle bundle = getArguments();
-
-        int idGnomeToShow = bundle.getInt("idGnome");
-        detailFragmentPresenter.getGnomeDetail(idGnomeToShow);
-
-
-        return view;
-    }
-
-
-
-    @Override
-    public void onAttach(Context context) {
-        AndroidSupportInjection.inject(this);
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onDetailFragmentLoaded(Gnome gnome) {
-
-        setData(gnome);
+        setData(gnomeToPrint);
 
     }
 
 
-    private void setData(Gnome gnome){
+    private void setData(GnomeToPrint gnomeToPrint){
 
 
-        loadImage(getContext(), gnome.getThumbnail(), imageView);
+        loadImage(getContext(), gnomeToPrint.getThumbnail(), imageView);
 
-
-        ageTextView.setText(gnome.getAge().toString());
-
-
-        nameTextView.setText(gnome.getName());
-
-
-        weightTextView.setText(gnome.getWeight().toString());
-
-
-        heightTextView.setText(gnome.getHeight().toString());
-
-
-        hairTextView.setText(gnome.getHairColor());
-
+        ageTextView.setText(gnomeToPrint.getAge());
+        nameTextView.setText(gnomeToPrint.getName());
+        weightTextView.setText(gnomeToPrint.getWeight());
+        heightTextView.setText(gnomeToPrint.getHeight());
+        hairTextView.setText(gnomeToPrint.getHairColor());
 
         tabHost.setup();
-
-
 
         Resources res = getResources();
 
@@ -165,7 +131,7 @@ public class DetailFragment extends Fragment implements DetailFragmentView{
 
 
         int[] toViews = {android.R.id.text1};
-        String[] fromColumns = gnome.getProfessions().toArray(new String[0]);
+        String[] fromColumns = gnomeToPrint.getProfessions().toArray(new String[0]);
 
 
         professionsAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_expandable_list_item_1,fromColumns);
@@ -173,7 +139,7 @@ public class DetailFragment extends Fragment implements DetailFragmentView{
         professionListView.setAdapter(professionsAdapter);
 
 
-        String[] fromFriendsColumns = gnome.getFriends().toArray(new String[0]);
+        String[] fromFriendsColumns = gnomeToPrint.getFriends().toArray(new String[0]);
 
 
         friendsAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_expandable_list_item_1,fromFriendsColumns);
@@ -189,6 +155,30 @@ public class DetailFragment extends Fragment implements DetailFragmentView{
     private void loadImage(Context context, String thumbnail, ImageView imageView){
 
         Images.loadImage(context, thumbnail, imageView);
+
+    }
+
+    @Override
+    protected int getLayoutResource() {
+        return R.layout.fragment_detail_constraint;
+    }
+
+    @Override
+    protected void setView() {
+
+        Bundle bundle = getArguments();
+
+        int idGnomeToShow = bundle.getInt("idGnome");
+        detailFragmentPresenter.getGnomeDetail(idGnomeToShow);
+    }
+
+    @Override
+    protected int getMenuResource() {
+        return 0;
+    }
+
+    @Override
+    protected void setOptionsMenu(Menu menu) {
 
     }
 }

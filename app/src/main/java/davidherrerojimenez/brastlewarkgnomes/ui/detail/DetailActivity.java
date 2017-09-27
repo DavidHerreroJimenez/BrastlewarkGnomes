@@ -12,6 +12,7 @@ import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 import davidherrerojimenez.brastlewarkgnomes.R;
+import davidherrerojimenez.brastlewarkgnomes.ui.base.BaseActivity;
 import davidherrerojimenez.brastlewarkgnomes.ui.detail.fragments.DetailFragment;
 
 /**
@@ -21,27 +22,10 @@ import davidherrerojimenez.brastlewarkgnomes.ui.detail.fragments.DetailFragment;
  * Created by dherrero on 7/09/17.
  */
 
-public class DetailActivity extends AppCompatActivity implements HasSupportFragmentInjector, DetailView{
+public class DetailActivity extends BaseActivity implements HasSupportFragmentInjector, DetailView{
 
     @Inject
     DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        AndroidInjection.inject(this);
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
-
-        Bundle bundle = getIntent().getExtras();
-
-
-        DetailFragment detailFragment = DetailFragment.newInstance();
-
-        detailFragment.setArguments(bundle);
-
-        getSupportFragmentManager().beginTransaction().add(R.id.container, detailFragment).commit();
-    }
-
 
 
     @Override
@@ -51,6 +35,30 @@ public class DetailActivity extends AppCompatActivity implements HasSupportFragm
 
     @Override
     public void onDetailLoaded() {
+
+    }
+
+    @Override
+    protected int getCustomTheme() {
+        return 0;
+    }
+
+    @Override
+    protected int getLayoutResource() {
+        return R.layout.activity_detail;
+    }
+
+    @Override
+    protected void setLogicOnCreate() {
+
+        Bundle bundle = getIntent().getExtras();
+
+
+        DetailFragment detailFragment = DetailFragment.newInstance();
+
+        detailFragment.setArguments(bundle);
+
+        getSupportFragmentManager().beginTransaction().add(R.id.container, detailFragment).commit();
 
     }
 }

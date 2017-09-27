@@ -28,6 +28,7 @@ import butterknife.Unbinder;
 import dagger.android.support.AndroidSupportInjection;
 import davidherrerojimenez.brastlewarkgnomes.R;
 import davidherrerojimenez.brastlewarkgnomes.model.Gnome;
+import davidherrerojimenez.brastlewarkgnomes.ui.base.BaseFragment;
 import davidherrerojimenez.brastlewarkgnomes.ui.detail.DetailActivity;
 import davidherrerojimenez.brastlewarkgnomes.ui.gnomes.fragments.adapters.GnomeAdapter;
 
@@ -38,7 +39,7 @@ import davidherrerojimenez.brastlewarkgnomes.ui.gnomes.fragments.adapters.GnomeA
  * Created by dherrero on 7/09/17.
  */
 
-public class GnomesFragment extends Fragment implements GnomesFragmentView{
+public class GnomesFragment extends BaseFragment implements GnomesFragmentView{
 
 
     @BindView(R.id.gnomes_recyclerview)
@@ -50,7 +51,6 @@ public class GnomesFragment extends Fragment implements GnomesFragmentView{
     private static List<Gnome> gnomeList;
     private String message;
     private static GnomeAdapter gnomeAdapter;
-    private Unbinder unbinder;
 
     @Inject
     public GnomesFragment() {
@@ -66,27 +66,9 @@ public class GnomesFragment extends Fragment implements GnomesFragmentView{
         return fragment;
     }
 
-    @Override
-    public void onAttach(Context context) {
-
-        AndroidSupportInjection.inject(this);
-        super.onAttach(context);
-    }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.fragment_gnomes, container, false);
-
-        unbinder = ButterKnife.bind(this,view);
-
+    protected void setView(){
 
         gnomesRecyclerView.setHasFixedSize(true);
 
@@ -119,7 +101,6 @@ public class GnomesFragment extends Fragment implements GnomesFragmentView{
         gnomesRecyclerView.setLayoutManager(layoutManager);
 
 
-        return view;
     }
 
     @Override
@@ -149,32 +130,30 @@ public class GnomesFragment extends Fragment implements GnomesFragmentView{
     }
 
 
-    @Override public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
-
-
-
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-
-        menu.clear();
-        inflater.inflate(R.menu.menu_gnomes, menu);
-
-        MenuItem search = menu.findItem(R.id.search_filter_gnomes);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(search);
-        search(searchView);
-
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+
+
+    @Override
+    protected int getLayoutResource() {
+        return R.layout.fragment_gnomes;
+    }
+
+    @Override
+    protected int getMenuResource() {
+        return R.menu.menu_gnomes;
+    }
+
+    @Override
+    protected void setOptionsMenu(Menu menu) {
+        MenuItem search = menu.findItem(R.id.search_filter_gnomes);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(search);
+        search(searchView);
     }
 
     private void search(SearchView searchView) {
