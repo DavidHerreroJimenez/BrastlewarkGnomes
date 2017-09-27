@@ -46,7 +46,7 @@ public class GnomesActivity extends BaseActivity implements HasSupportFragmentIn
     @Override
     protected int getCustomTheme() {
 
-        return R.style.AppTheme;
+        return 0;
 
     }
 
