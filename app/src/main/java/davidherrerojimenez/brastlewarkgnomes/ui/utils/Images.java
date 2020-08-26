@@ -16,8 +16,10 @@ public class Images {
 
     public static void loadImage(Context context, String thumbnail, ImageView imageView){
 
-        Picasso.with(context)
-                .load(thumbnail)
+
+        Picasso.get()
+                //.load(thumbnail)
+                .load("https://i.imgur.com/DvpvklR.png")
                 .fit()
                 .centerInside()
                 .into(imageView);
