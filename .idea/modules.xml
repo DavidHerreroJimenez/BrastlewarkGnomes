@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BrastlewarkGnomes.iml" filepath="$PROJECT_DIR$/BrastlewarkGnomes.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/BrastlewarkGnomes-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/BrastlewarkGnomes-app.iml" group="BrastlewarkGnomes/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ProjectsAndroid-BrastlewarkGnomes.iml" filepath="$PROJECT_DIR$/.idea/modules/ProjectsAndroid-BrastlewarkGnomes.iml" group="BrastlewarkGnomes" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
