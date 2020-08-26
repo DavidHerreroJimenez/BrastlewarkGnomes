@@ -1,37 +1,27 @@
-## Welcome to GitHub Pages
+# BrastlewarkGnomes
+_An android example app with lists and getting data from json._
 
-You can use the [editor on GitHub](https://github.com/DavidHerreroJimenez/BrastlewarkGnomes/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+## Some screenshots:
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+<img src="images_readme/br1.png" alt="drawing" width="200"/>  <img src="images_readme/br2.png" alt="drawing" width="200"/>
+<img src="images_readme/br3.png" alt="drawing" width="200"/>  <img src="images_readme/br4.png" alt="drawing" width="200"/>
+<img src="images_readme/br5.png" alt="drawing" width="200"/>  <img src="images_readme/br6.png" alt="drawing" width="200"/>
 
-### Markdown
+## Project settings:
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+- [Dagger 2](https://dagger.dev/): A dependency injection framework.
+- [Butterknife](https://jakewharton.github.io/butterknife/): Field and method binding for Android views. 
 
-```markdown
-Syntax highlighted code block
+- [Retrofit](https://square.github.io/retrofit/): A type-safe HTTP client for Android and Java.
+- [GSON](https://github.com/google/gson): Convert Java Objects into their JSON representation.
 
-# Header 1
-## Header 2
-### Header 3
+- [Picasso](https://square.github.io/picasso/): An image downloading and caching library for Android.
 
-- Bulleted
-- List
+- [Junit4](https://junit.org/junit4/): A framework to write repeatable tests.
+- [Mockito](https://site.mockito.org/): Mocking framework for unit tests in Java.
+- [Espresso](https://developer.android.com/training/testing/espresso): Android UI tests.
 
-1. Numbered
-2. List
+- [Support libraries](https://developer.android.com/topic/libraries/support-library): Support multiple API versions.
 
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/DavidHerreroJimenez/BrastlewarkGnomes/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+## Source: 
+[BrastlewarkGnomes](https://github.com/DavidHerreroJimenez/BrastlewarkGnomes)
